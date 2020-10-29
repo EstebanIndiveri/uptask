@@ -9,5 +9,19 @@ exports.formularioProyecto=(req,res)=>{
     })
 }
 exports.nuevoProyecto=(req,res)=>{
-    res.send('Enviaste el formulario')
+    // res.send('Enviaste el formulario')
+    //send data
+    // console.log(req.body);
+    const {nombre}=req.body;
+    let errores=[];
+    if(!nombre || nombre.trim()==='' || nombre.trim()===undefined){
+        errores.push({'texto':'Agrega un nombre al proyecto'})
+    }
+    if(errores.length > 0){
+
+        res.render('nuevoProyecto',{
+            nombrePagina:'Nuevo Proyecto',
+            errores
+        })
+    }
 }
