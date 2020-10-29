@@ -47,12 +47,20 @@ body {
 .campo {
     display: flex;
     margin-bottom: 1rem;
+    outline: none;
     align-items: center;
+}
+.campo:focus{
+    outline: none;
 }
 .campo label {
     flex: 0 0 100px;
     text-align: right;
     padding-right: 1rem;
+    outline: none;
+}
+.campo label:focus{
+    outline: none;
 }
 .campo input[type="email"],
 .campo input[type="text"],
@@ -64,6 +72,10 @@ body {
     border-radius: 5rem;
     padding-left: 2rem;
     color: black;
+    outline: none;
+}
+.campo input:focus{
+    outline: none;
 }
 .campo.acciones {
     justify-content: space-between;
