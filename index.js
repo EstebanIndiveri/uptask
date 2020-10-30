@@ -2,6 +2,14 @@ const express=require('express');
 const routes=require('./routes');
 const path=require('path');
 const bodyParser=require('body-parser');
+
+// conexión db
+const db=require('./config/db');
+
+require('./models/Proyectos');
+
+db.sync().then(()=>console.log('Conectado al server')).catch(error=>console.log(error));
+
 //app express
 const app = express();
 
