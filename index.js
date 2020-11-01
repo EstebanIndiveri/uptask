@@ -8,7 +8,7 @@ const db=require('./config/db');
 
 require('./models/Proyectos');
 
-db.sync().then(()=>console.log('Conectado al server')).catch(error=>console.log(error));
+db.sync().then(()=>console.log('Conectado al server localhost')).catch(error=>console.log(error));
 
 //app express
 const app = express();
