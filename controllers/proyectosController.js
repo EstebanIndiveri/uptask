@@ -30,7 +30,6 @@ exports.nuevoProyecto=async(req,res)=>{
     }else{
         //insert DB
         // const url=(slug(nombre).toLowerCase());
-        
         const proyecto=await Proyectos.create({nombre});
         res.redirect('/');
 
