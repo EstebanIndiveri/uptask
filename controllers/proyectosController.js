@@ -1,3 +1,5 @@
+const Proyectos=require('../models/Proyectos');
+
 exports.proyectosHome=(req,res)=>{
     res.render('index',{
         nombrePagina: 'Proyectos'
@@ -23,5 +25,8 @@ exports.nuevoProyecto=(req,res)=>{
             nombrePagina:'Nuevo Proyecto',
             errores
         })
+    }else{
+        //insert DB
+        Proyectos.create({nombre}).then(()=>console.log('Insertado correctamente')).catch(error=>console.log(error))
     }
 }
