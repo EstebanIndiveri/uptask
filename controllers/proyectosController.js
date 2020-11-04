@@ -10,7 +10,7 @@ exports.formularioProyecto=(req,res)=>{
         nombrePagina:'Nuevo Proyecto'
     })
 }
-exports.nuevoProyecto=(req,res)=>{
+exports.nuevoProyecto=async(req,res)=>{
     // res.send('Enviaste el formulario')
     //send data
     // console.log(req.body);
@@ -25,8 +25,12 @@ exports.nuevoProyecto=(req,res)=>{
             nombrePagina:'Nuevo Proyecto',
             errores
         })
+ 
+    
     }else{
         //insert DB
-        Proyectos.create({nombre}).then(()=>console.log('Insertado correctamente')).catch(error=>console.log(error))
+        const proyecto=await Proyectos.create({nombre});
+        res.redirect('/');
+
     }
 }
