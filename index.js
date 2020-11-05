@@ -24,6 +24,8 @@ app.set('views',path.join(__dirname,'./views'));
 
 //var dump a app
 app.use((req,res,next)=>{
+    // const fecha=new Date();
+    // res.locals.year=fecha.getFullYear();
     res.locals.vardump=utils.vardump;
     next();
 });
