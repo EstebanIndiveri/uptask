@@ -1,3 +1,4 @@
+// const { ne } = require('sequelize/types/lib/operators');
 const slug = require('slug');
 const Proyectos=require('../models/Proyectos');
 exports.proyectosHome=async (req,res)=>{
@@ -9,15 +10,20 @@ exports.proyectosHome=async (req,res)=>{
         proyectos
     });
 }
-exports.formularioProyecto=(req,res)=>{
+exports.formularioProyecto=async(req,res)=>{
+    const proyectos=await Proyectos.findAll();
+
     res.render('nuevoProyecto',{
-        nombrePagina:'Nuevo Proyecto'
+        nombrePagina:'Nuevo Proyecto',
+        proyectos
     })
 }
 exports.nuevoProyecto=async(req,res)=>{
     // res.send('Enviaste el formulario')
     //send data
     // console.log(req.body);
+    const proyectos=await Proyectos.findAll();
+
     const {nombre}=req.body;
     let errores=[];
     if(!nombre || nombre.trim()==='' || nombre.trim()===undefined){
@@ -27,7 +33,8 @@ exports.nuevoProyecto=async(req,res)=>{
 
         res.render('nuevoProyecto',{
             nombrePagina:'Nuevo Proyecto',
-            errores
+            errores,
+            proyectos
         })
  
     
@@ -40,6 +47,20 @@ exports.nuevoProyecto=async(req,res)=>{
     }
 }
 
-exports.proyectoPorUrl=(req,res)=>{
+exports.proyectoPorUrl=async(req,res,next)=>{
     // res.send(req.params.url);
+    const proyectos=await Proyectos.findAll();
+    const proyecto=await Proyectos.findOne({
+        where:{
+            url:req.params.url
+        }
+    });
+    if(!proyecto) return next();
+    // res.send('ok');
+
+    res.render('tareas',{
+        nombrePagina:'Tareas del proyecto',
+        proyecto,
+        proyectos
+    })
 }
