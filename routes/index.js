@@ -2,7 +2,7 @@ const express=require('express');
 
 const router=express.Router();
 
-const{body}=require('express-validator/check');
+const{body}=require('express-validator');
 
 const proyectosController=require('../controllers/proyectosController');
 //routes:

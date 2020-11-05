@@ -2,7 +2,7 @@ const express=require('express');
 const routes=require('./routes');
 const path=require('path');
 const bodyParser=require('body-parser');
-
+const utils=require('./utils/index');
 // conexión db
 const db=require('./config/db');
 
@@ -21,6 +21,12 @@ app.use(express.static('public'));
 
 //vistas
 app.set('views',path.join(__dirname,'./views'));
+
+//var dump a app
+app.use((req,res,next)=>{
+    res.locals.vardump=utils.vardump;
+    next();
+});
 
 //bodyparser
 app.use(bodyParser.urlencoded({extended:true}))
