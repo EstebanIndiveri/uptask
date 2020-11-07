@@ -28,6 +28,7 @@ exports.nuevoProyecto=async(req,res)=>{
     let errores=[];
     if(!nombre || nombre.trim()==='' || nombre.trim()===undefined){
         errores.push({'texto':'Agrega un nombre al proyecto'})
+        console.log(erroes);
     }
     if(errores.length > 0){
 
