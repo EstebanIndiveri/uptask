@@ -82,3 +82,36 @@ exports.formularioEditar=async(req,res)=>{
         proyecto
     })
 }
+
+
+exports.actualizarProyecto=async(req,res)=>{
+    // res.send('Enviaste el formulario')
+    //send data
+    // console.log(req.body);
+    const proyectos=await Proyectos.findAll();
+
+    const {nombre}=req.body;
+    let errores=[];
+    if(!nombre || nombre.trim()==='' || nombre.trim()===undefined){
+        errores.push({'texto':'Agrega un nombre al proyecto'})
+        console.log(erroes);
+    }
+    if(errores.length > 0){
+
+        res.render('nuevoProyecto',{
+            nombrePagina:'Nuevo Proyecto',
+            errores,
+            proyectos
+        })
+ 
+    
+    }else{
+        //insert DB
+        // const url=(slug(nombre).toLowerCase());
+        const proyecto=await Proyectos.update({nombre:nombre},
+            {where:{id:req.params.id}}
+            );
+        res.redirect('/');
+
+    }
+}
