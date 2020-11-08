@@ -24,5 +24,14 @@ module.exports=function(){
     body('nombre').not().isEmpty().trim().escape()
     ,proyectosController.actualizarProyecto);
 
+
+    //delete p
+
+    router.delete('/proyectos/:url',proyectosController.eliminarProyecto);
+
+
+
+
+
     return router;
 }
