@@ -5,8 +5,10 @@ const router=express.Router();
 const{body}=require('express-validator');
 
 const proyectosController=require('../controllers/proyectosController');
-//routes:
 
+const tareasController=require('../controllers/tareasController');
+
+//routes:
 
 module.exports=function(){
     router.get('/',proyectosController.proyectosHome);
@@ -30,7 +32,8 @@ module.exports=function(){
     router.delete('/proyectos/:url',proyectosController.eliminarProyecto);
 
 
-
+    //Tareas:
+    router.post('/proyectos/:url',tareasController.agregarTarea)
 
 
     return router;

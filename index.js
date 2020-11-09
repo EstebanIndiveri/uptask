@@ -8,6 +8,9 @@ const db=require('./config/db');
 
 require('./models/Proyectos');
 
+require('./models/Tareas');
+
+
 db.sync().then(()=>console.log('Conectado al server localhost')).catch(error=>console.log(error));
 
 //app express

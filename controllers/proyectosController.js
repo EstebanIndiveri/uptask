@@ -1,6 +1,7 @@
 // const { ne } = require('sequelize/types/lib/operators');
 const slug = require('slug');
 const Proyectos=require('../models/Proyectos');
+const Tareas=require('../models/Tareas');
 exports.proyectosHome=async (req,res)=>{
 
     const proyectos=await Proyectos.findAll();
@@ -57,13 +58,27 @@ exports.proyectoPorUrl=async(req,res,next)=>{
         }
     });
     const[proyectos,proyecto]=await Promise.all([proyectosPromise,proyectPromise]);
+    
+    const tareas=await Tareas.findAll({
+        where:{
+            proyectoId:proyecto.id
+        }
+        // include:[
+        //     {model:Proyectos}
+        // ]
+    });
+    
+    // console.log(tareas);
+    
     if(!proyecto) return next();
     // res.send('ok');
+
 
     res.render('tareas',{
         nombrePagina:'Tareas del proyecto',
         proyecto,
-        proyectos
+        proyectos,
+        tareas
     })
 }
 
