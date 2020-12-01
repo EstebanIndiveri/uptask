@@ -11,7 +11,7 @@ require('./models/Proyectos');
 require('./models/Tareas');
 
 
-db.sync().then(()=>console.log('Conectado al server localhost')).catch(error=>console.log(error));
+db.sync().then(()=>console.log('Conectado al server localhost:3000')).catch(error=>console.log(error));
 
 //app express
 const app = express();
