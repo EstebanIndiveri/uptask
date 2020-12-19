@@ -35,6 +35,8 @@ module.exports=function(){
     //Tareas:
     router.post('/proyectos/:url',tareasController.agregarTarea)
 
+    //ActualizarTarea
+    router.patch('/tareas/:id',tareasController.cambiarEstadoTarea)
 
     return router;
 }
