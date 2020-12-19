@@ -56,7 +56,7 @@ if(tareas){
                                 icon:'success',
                                 title:'Tarea Eliminada',
                                 html:`<b>${titleMsj}</b> <br> ${statusOk}`
-                            })
+                            });
                         }
                     })
                 }
