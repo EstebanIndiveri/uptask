@@ -3,12 +3,15 @@ const routes=require('./routes');
 const path=require('path');
 const bodyParser=require('body-parser');
 const utils=require('./utils/index');
+const flash=require('connect-flash');
+const session=require('express-session');
+const cookieParser=require('cookie-parser');
 // conexión db
 const db=require('./config/db');
 
 require('./models/Proyectos');
-
 require('./models/Tareas');
+require('./models/Usuarios');
 
 
 db.sync().then(()=>console.log('Conectado al server localhost:3000')).catch(error=>console.log(error));
@@ -16,25 +19,39 @@ db.sync().then(()=>console.log('Conectado al server localhost:3000')).catch(erro
 //app express
 const app = express();
 
-//Pug
-app.set('view engine','pug');
-
 //static files
 app.use(express.static('public'));
 
+//Pug
+app.set('view engine','pug');
+
+//bodyparser
+app.use(bodyParser.urlencoded({extended:true}))
+
+
 //vistas
 app.set('views',path.join(__dirname,'./views'));
+
+//flahsmsj
+app.use(flash());
+
+app.use(cookieParser());
+
+//sessions
+app.use(session({
+    secret:'supersecret',
+    resave:false,
+    saveUninitialized:false
+}));
 
 //var dump a app
 app.use((req,res,next)=>{
     // const fecha=new Date();
     // res.locals.year=fecha.getFullYear();
     res.locals.vardump=utils.vardump;
+    res.locals.mensajes=req.flash();
     next();
 });
-
-//bodyparser
-app.use(bodyParser.urlencoded({extended:true}))
 
 //routes
 app.use('/',routes());

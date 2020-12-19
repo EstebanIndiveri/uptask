@@ -5,8 +5,11 @@ const router=express.Router();
 const{body}=require('express-validator');
 
 const proyectosController=require('../controllers/proyectosController');
+const usuariosController =require('../controllers/usuariosController');
+
 
 const tareasController=require('../controllers/tareasController');
+
 
 //routes:
 
@@ -40,6 +43,12 @@ module.exports=function(){
 
     //delete tarea
     router.delete('/tareas/:id',tareasController.eliminarTarea)
+
+
+    // NUEVA CUENTA
+    router.get('/crear-cuenta',usuariosController.formCrearCuenta)
+
+    router.post('/crear-cuenta',usuariosController.crearCuenta)
 
 
     return router;

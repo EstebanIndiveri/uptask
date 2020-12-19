@@ -1,5 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
+import {actualizarAvance} from '../funciones/avance';
+
 
 const tareas=document.querySelector('.listado-pendientes');
 
@@ -10,17 +12,18 @@ if(tareas){
             const icono=e.target;
             const idTarea=icono.parentElement.parentElement.dataset.tarea;
             const nameTarea=icono.parentElement.parentElement.dataset.name;
-            console.log(idTarea);
-            console.log(nameTarea);
+            // console.log(idTarea);
+            // console.log(nameTarea);
 
             // req: /tareas/:id
             const url=`${location.origin}/tareas/${idTarea}`;
             // console.log(url);
 
             axios.patch(url,{idTarea}).then((res)=>{
-                console.log(res);
+                // console.log(res);
                 if(res.status===200){
                     icono.classList.toggle('completo');
+                    actualizarAvance();
                 }
             })
         }
@@ -28,8 +31,8 @@ if(tareas){
             const tareaHtml=e.target.parentElement.parentElement;
             const idTarea=tareaHtml.dataset.tarea
             const nameTarea=tareaHtml.dataset.name;
-            console.log(tareaHtml);
-            console.log(idTarea);
+            // console.log(tareaHtml);
+            // console.log(idTarea);
             Swal.fire({
                 title:'¿Desea borrar esta tarea?',
                 text:'La tarea se eliminará permanentemente',
@@ -57,6 +60,7 @@ if(tareas){
                                 title:'Tarea Eliminada',
                                 html:`<b>${titleMsj}</b> <br> ${statusOk}`
                             });
+                            actualizarAvance();
                         }
                     })
                 }

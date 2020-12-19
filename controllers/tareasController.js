@@ -46,7 +46,7 @@ exports.eliminarTarea=async(req,res,next)=>{
     // console.log(req.query);
     const{id}=req.params;
     const{nameTarea}=req.query;
-    console.log(nameTarea);
+    // console.log(nameTarea);
     const response=await Tareas.destroy({where:{id}});
     if(!response)return next();
     // console.log(id);
