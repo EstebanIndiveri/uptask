@@ -6,7 +6,7 @@ const{body}=require('express-validator');
 
 const proyectosController=require('../controllers/proyectosController');
 const usuariosController =require('../controllers/usuariosController');
-
+const authController=require('../controllers/authController');
 
 const tareasController=require('../controllers/tareasController');
 
@@ -14,41 +14,45 @@ const tareasController=require('../controllers/tareasController');
 //routes:
 
 module.exports=function(){
-    router.get('/',proyectosController.proyectosHome);
-    router.get('/nuevo-proyecto',proyectosController.formularioProyecto)
-    router.post('/nuevo-proyecto',
+    router.get('/',[authController.usuarioAutenticado],proyectosController.proyectosHome);
+    router.get('/nuevo-proyecto',[authController.usuarioAutenticado],proyectosController.formularioProyecto)
+    router.post('/nuevo-proyecto',[authController.usuarioAutenticado],
     body('nombre').not().isEmpty().trim().escape()
     ,proyectosController.nuevoProyecto);
 
-    router.get('/proyectos/:url',proyectosController.proyectoPorUrl)
+    router.get('/proyectos/:url',[authController.usuarioAutenticado],proyectosController.proyectoPorUrl)
 
     // update p
-    router.get('/proyecto/editar/:id',proyectosController.formularioEditar)
+    router.get('/proyecto/editar/:id',[authController.usuarioAutenticado],proyectosController.formularioEditar)
 
-    router.post('/nuevo-proyecto/:id',
+    router.post('/nuevo-proyecto/:id',[authController.usuarioAutenticado],
     body('nombre').not().isEmpty().trim().escape()
     ,proyectosController.actualizarProyecto);
 
-
     //delete project
-
-    router.delete('/proyectos/:url',proyectosController.eliminarProyecto);
+    router.delete('/proyectos/:url',[authController.usuarioAutenticado],proyectosController.eliminarProyecto);
 
 
     //Tareas:
-    router.post('/proyectos/:url',tareasController.agregarTarea)
+    router.post('/proyectos/:url',[authController.usuarioAutenticado],tareasController.agregarTarea)
 
     //ActualizarTarea
-    router.patch('/tareas/:id',tareasController.cambiarEstadoTarea)
+    router.patch('/tareas/:id',[authController.usuarioAutenticado],tareasController.cambiarEstadoTarea)
 
     //delete tarea
-    router.delete('/tareas/:id',tareasController.eliminarTarea)
+    router.delete('/tareas/:id',[authController.usuarioAutenticado],tareasController.eliminarTarea)
 
 
     // NUEVA CUENTA
     router.get('/crear-cuenta',usuariosController.formCrearCuenta)
-
     router.post('/crear-cuenta',usuariosController.crearCuenta)
+
+    // iniciar sesión:
+    router.get('/iniciar-sesion',usuariosController.formIniciarSesión)
+    router.post('/iniciar-sesion',authController.autenticarUsuario)
+
+    router.get('/cerrar-sesion',authController.cerrarSesion)
+
 
 
     return router;

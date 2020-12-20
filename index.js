@@ -6,6 +6,7 @@ const utils=require('./utils/index');
 const flash=require('connect-flash');
 const session=require('express-session');
 const cookieParser=require('cookie-parser');
+const passport=require('./config/passport');
 // conexión db
 const db=require('./config/db');
 
@@ -43,6 +44,10 @@ app.use(session({
     resave:false,
     saveUninitialized:false
 }));
+
+// passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 //var dump a app
 app.use((req,res,next)=>{
