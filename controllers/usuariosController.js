@@ -44,6 +44,10 @@ exports.crearCuenta=async(req,res,next)=>{
         });
     }
 
-   
-    //crearusuario
+}
+
+exports.formRestablecerPass=(req,res)=>{
+    res.render('reestablecer',{
+        nombrePagina:'Reestablecer tu contraseña',
+    })
 }

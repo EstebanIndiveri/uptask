@@ -4,7 +4,8 @@ const Proyectos=require('../models/Proyectos');
 const Tareas=require('../models/Tareas');
 exports.proyectosHome=async (req,res)=>{
 
-    const proyectos=await Proyectos.findAll();
+    const usuarioId=res.locals.usuario.id;
+    const proyectos=await Proyectos.findAll({where:{usuarioId}});
 
     res.render('index',{
         nombrePagina: 'Proyectos',
@@ -12,7 +13,8 @@ exports.proyectosHome=async (req,res)=>{
     });
 }
 exports.formularioProyecto=async(req,res)=>{
-    const proyectos=await Proyectos.findAll();
+    const usuarioId=res.locals.usuario.id;
+    const proyectos=await Proyectos.findAll({where:{usuarioId}});
 
     res.render('nuevoProyecto',{
         nombrePagina:'Nuevo Proyecto',
@@ -23,7 +25,8 @@ exports.nuevoProyecto=async(req,res)=>{
     // res.send('Enviaste el formulario')
     //send data
     // console.log(req.body);
-    const proyectos=await Proyectos.findAll();
+    const usuarioId=res.locals.usuario.id;
+    const proyectos=await Proyectos.findAll({where:{usuarioId}});
 
     const {nombre}=req.body;
     let errores=[];
@@ -43,7 +46,8 @@ exports.nuevoProyecto=async(req,res)=>{
     }else{
         //insert DB
         // const url=(slug(nombre).toLowerCase());
-        const proyecto=await Proyectos.create({nombre});
+        const usuarioId=res.locals.usuario.id;
+        const proyecto=await Proyectos.create({nombre,usuarioId});
         res.redirect('/');
 
     }
@@ -51,10 +55,15 @@ exports.nuevoProyecto=async(req,res)=>{
 
 exports.proyectoPorUrl=async(req,res,next)=>{
     // res.send(req.params.url);
-    const proyectosPromise= Proyectos.findAll();
+
+    const usuarioId=res.locals.usuario.id;
+    const proyectosPromise= Proyectos.findAll({where:{usuarioId}});
+
+    // const proyectosPromise= Proyectos.findAll();
     const proyectPromise= Proyectos.findOne({
         where:{
-            url:req.params.url
+            url:req.params.url,
+            usuarioId
         }
     });
     const[proyectos,proyecto]=await Promise.all([proyectosPromise,proyectPromise]);
@@ -83,10 +92,15 @@ exports.proyectoPorUrl=async(req,res,next)=>{
 }
 
 exports.formularioEditar=async(req,res)=>{
-    const proyectosPromise= Proyectos.findAll();
+
+    const usuarioId=res.locals.usuario.id;
+    const proyectosPromise= Proyectos.findAll({where:{usuarioId}});
+    
+    // const proyectosPromise= Proyectos.findAll();
     const proyectPromise= Proyectos.findOne({
         where:{
-            id:req.params.id
+            id:req.params.id,
+            usuarioId
         }
     });
     const[proyectos,proyecto]=await Promise.all([proyectosPromise,proyectPromise]);
@@ -103,7 +117,10 @@ exports.actualizarProyecto=async(req,res)=>{
     // res.send('Enviaste el formulario')
     //send data
     // console.log(req.body);
-    const proyectos=await Proyectos.findAll();
+    const usuarioId=res.locals.usuario.id;
+    const proyectos=await Proyectos.findAll({where:{usuarioId}});
+
+    // const proyectos=await Proyectos.findAll();
 
     const {nombre}=req.body;
     let errores=[];

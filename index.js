@@ -55,6 +55,8 @@ app.use((req,res,next)=>{
     // res.locals.year=fecha.getFullYear();
     res.locals.vardump=utils.vardump;
     res.locals.mensajes=req.flash();
+    res.locals.usuario={...req.user}||null;
+    // console.log(res.locals.usuario);
     next();
 });
 
