@@ -1,3 +1,4 @@
+const main = require('../handler/email');
 const Usuarios=require('../models/Usuarios')
 
 exports.formCrearCuenta=(req,res,next)=>{
@@ -24,10 +25,29 @@ exports.crearCuenta=async(req,res,next)=>{
             email,
             password
         });
+
+        // url de confirmar
+        const confirmarUrl=`http://${req.headers.host}/confirmar/${email}`;
+        console.log(resetUrl);
+        
+        // objeto de usuario
+        const usuario={
+            email
+        }
+        // enmviar email
+        await main({
+            usuario,
+            subject:'Confirma tu cuenta upTast',
+            confirmarUrl,
+            archivo: 'confirmar-cuenta'
+        });
+        // redirigir
+        req.flash('correcto','Enviamos un correo, confirma tu cuenta');
         res.redirect('/iniciar-sesion')
     } catch (error) {
         let todos=error.errors;
         // console.log(error.errors)
+        if(!todos)return;
         todos.map((elemnt)=>{
             if(elemnt.message==='usuarios.usuarios_email_unique must be unique'){
                 let algo=elemnt.message='El email ya se encuentra registrado';
