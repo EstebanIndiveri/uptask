@@ -6,6 +6,7 @@ const util=require('util');
 const emailConfig=require('../config/email');
 
 async function main(opciones={}) {
+  try{
 let transport = nodemailer.createTransport({
     host: emailConfig.host,
     port: emailConfig.port,
@@ -30,7 +31,9 @@ let transport = nodemailer.createTransport({
   });
   console.log("Message sent: %s", info.messageId);
 //   transport.sendMail(mailOptions);
-
+  }catch(error){
+    console.log(error);
+  }
 }
-main().catch(console.error);
+// main().catch(console.error);
 module.exports = main;

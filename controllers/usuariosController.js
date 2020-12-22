@@ -1,5 +1,6 @@
-const main = require('../handler/email');
 const Usuarios=require('../models/Usuarios')
+const Sequelize=require('sequelize');
+const main = require('../handler/email');
 
 exports.formCrearCuenta=(req,res,next)=>{
     res.render('crearCuenta',{
@@ -19,17 +20,15 @@ exports.formIniciarSesión=(req,res,next)=>{
 exports.crearCuenta=async(req,res,next)=>{
     //leer datos
     const{email,password}=req.body;
-
     try {
         await Usuarios.create({
             email,
             password
         });
-
         // url de confirmar
         const confirmarUrl=`http://${req.headers.host}/confirmar/${email}`;
-        console.log(resetUrl);
-        
+        console.log(confirmarUrl);
+        console.log(password);
         // objeto de usuario
         const usuario={
             email
@@ -42,8 +41,9 @@ exports.crearCuenta=async(req,res,next)=>{
             archivo: 'confirmar-cuenta'
         });
         // redirigir
-        req.flash('correcto','Enviamos un correo, confirma tu cuenta');
+        req.flash('correcto','Enviamos un correo, confirma tu  cuenta');
         res.redirect('/iniciar-sesion')
+        console.log('cASI');
     } catch (error) {
         let todos=error.errors;
         // console.log(error.errors)
