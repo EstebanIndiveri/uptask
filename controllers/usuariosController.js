@@ -27,8 +27,8 @@ exports.crearCuenta=async(req,res,next)=>{
         });
         // url de confirmar
         const confirmarUrl=`http://${req.headers.host}/confirmar/${email}`;
-        console.log(confirmarUrl);
-        console.log(password);
+        // console.log(confirmarUrl);
+        // console.log(password);
         // objeto de usuario
         const usuario={
             email
@@ -43,7 +43,7 @@ exports.crearCuenta=async(req,res,next)=>{
         // redirigir
         req.flash('correcto','Enviamos un correo, confirma tu  cuenta');
         res.redirect('/iniciar-sesion')
-        console.log('cASI');
+        // console.log('cASI');
     } catch (error) {
         let todos=error.errors;
         // console.log(error.errors)
