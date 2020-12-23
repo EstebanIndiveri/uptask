@@ -5,15 +5,20 @@ const htmlToText=require('html-to-text');
 const util=require('util');
 const emailConfig=require('../config/email');
 
+
 async function main(opciones={}) {
   try{
 let transport = nodemailer.createTransport({
     host: emailConfig.host,
     port: emailConfig.port,
+    secure: false,
     auth: {
       user: emailConfig.user, // generated ethereal user
       pass: emailConfig.pass, // generated ethereal password
     },
+    tls: {
+      rejectUnauthorized: false
+  }
   });
   const generarHtml=(archivo,opciones={})=>{
       const html=pug.renderFile(`${__dirname}/../views/emails/${archivo}.pug`,opciones)
@@ -23,12 +28,12 @@ let transport = nodemailer.createTransport({
   const html=generarHtml(opciones.archivo,opciones);
   const text=htmlToText.fromString(html);
   let info = await transport.sendMail({
-    from: '"Fred Foo 👻" <foo@example.com>', // sender address
+    from: '"UpTask 👻" <info@uptask.com>', // sender address
     to: opciones.usuario.email, // list of receivers
     subject: opciones.subject, // Subject line
     text,  // plain text body
-    html // html body
-  });
+    html // html body 
+});
   console.log("Message sent: %s", info.messageId);
 //   transport.sendMail(mailOptions);
   }catch(error){
