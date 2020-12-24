@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon .",
     "con": "concurrently \"npm run dev \" \"npm run watch\" ",
-    "watch": "webpack -w --mode development"
+    "yes":"node index.js",
+    "watch": "webpack -w --mode development",
+    "start":"concurrently \"npm run yes \" \"npm run watch\" "
   },
   "author": "Esteban Indiveri",
   "license": "ISC",
