@@ -21,7 +21,10 @@ exports.agregarTarea=async(req,res,next)=>{
     //res
     // res.redirect(`{http://localhost:3000}/proyectos/${req.params.url}`);
 
-    res.redirect(`${window.location.host}/proyectos/${req.params.url}`);
+    let herokuweb=process.env.NODE_ENV
+    // let local="http://localhost:8080"
+
+    res.redirect(`${herokuweb}/proyectos/${req.params.url}`);
 }
 
 exports.cambiarEstadoTarea=async(req,res,next)=>{

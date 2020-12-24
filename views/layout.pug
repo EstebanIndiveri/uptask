@@ -18,8 +18,8 @@ html(lang="en")
                         if(proyectos.length)
                             each proyecto in proyectos
                                 li
-                                    a(href=`${window.location.host}/proyectos/${proyecto.url}`)=proyecto.nombre
-                                    //- a(href=`http://localhost:3000/proyectos/${proyecto.url}`)=proyecto.nombre
+                                    //- a(href=`http://localhost:8080/proyectos/${proyecto.url}`)=proyecto.nombre
+                                    a(href=`https://uptasker.herokuapp.com/proyectos/${proyecto.url}`)=proyecto.nombre
             block contenido
 
             //- pre=vardump(proyectos)

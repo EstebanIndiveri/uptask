@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 html {
     box-sizing: border-box;
 }
@@ -5,13 +6,14 @@ html {
     box-sizing: inherit;
 }
 body {
-    font-family: 'Lato', sans-serif;
+    /* font-family: 'Lato', sans-serif; */
+    font-family: 'Montserrat', sans-serif;
     min-height: 100vh;
 }
 /** Login **/
 .login,
 .crear-cuenta {
-    background: #455A64;
+    background: #ffffff;
 }
 .contenedor-formulario {
     display: flex;
@@ -21,7 +23,7 @@ body {
 }
 .contenedor-formulario h1 {
     text-align: center;
-    color: white;
+    color: rgb(146, 146, 146);
 }
 .contenedor-formulario h1  span{
     font-weight: 400;
@@ -33,16 +35,22 @@ body {
     font-size: 1.4rem;
 }
 .caja-login {
-    background-color: #F2F2F2;
-    border: 1px solid #707070;
+    background-color: #ffffff;
+    /* border: 1px solid #707070; */
+    border-radius: 20px;
     max-width: 650px;
     width: 90%;
     margin: 0 auto;
     min-height: 300px;
-    -webkit-box-shadow: 0px 25px 35px -17px rgba(0,0,0,0.56);
-    -moz-box-shadow: 0px 25px 35px -17px rgba(0,0,0,0.56);
-    box-shadow: 0px 25px 35px -17px rgba(0,0,0,0.56);
+    -webkit-box-shadow: 0px 0px 18px 3px rgba(46, 46, 46, 0.56);
+    -moz-box-shadow:0px 0px 18px 3px rgba(46, 46, 46, 0.56);
+    /* box-shadow: 0px 25px 35px -17px rgba(46, 46, 46, 0.56); */
+    box-shadow: 0px 0px 18px 3px rgba(46, 46, 46, 0.56);
     padding: 3rem;
+    transition: all 300ms ease-in-out;
+}
+.caja-login:hover{
+    box-shadow: 0px 0px 18px 6px rgba(46, 46, 46, 0.56);
 }
 .campo {
     display: flex;
@@ -86,6 +94,7 @@ body {
 .boton {
     background-color: #FDD835;
     text-align: center;
+    border-radius: 10px;
     transition: background-color .5s ease-in-out;
     padding: 2rem;
     text-transform: uppercase;
@@ -93,6 +102,7 @@ body {
     font-weight: 900;
     width: 250px;
     margin:0  auto;
+    color:rgb(54, 54, 54) !important;
 
     display: flex;
     align-items: center;
@@ -108,10 +118,11 @@ body {
     background-color: rgb(219, 184, 29)!important;
 }
 .boton.eliminar {
+    padding: 1rem !important;
     margin-top: 1rem;
     float: right;
-    background-color: red!important;
-    color: white;
+    background-color: rgb(212, 97, 97)!important;
+    color: white !important;
 }
 .campo a {
     color: black;
@@ -123,7 +134,7 @@ body.index {
     height: 100vh;
 }
 .barra {
-    background-color: #455A64;
+    background-color: #ffffff;
     padding: 1rem;
     height: 60px;
     display: flex;
@@ -131,20 +142,23 @@ body.index {
     align-items: center;
 }
 .barra h1 {
-    color: white;
+    color: rgb(117, 117, 117);
     margin:0;
     font-size: 1.4rem;
 }
 .barra a {
-    color: white;
+    color: rgb(117, 117, 117);
+    /* color: white; */
     text-decoration: none;
 }
 /*** sidebar**/
 .contenedor-proyectos {
     height: 100%;
     max-width: 300px;
-    background-color: #607D8B;
+    background-color: #ffffff;
     padding-top: 1rem;
+    box-shadow: 2px 12px 10px 2px #b3b3b3;
+    border-radius: 20px;
 }
 .panel {
     padding: 1rem;
@@ -168,6 +182,7 @@ body.index {
 }
 .crear-proyecto a {
     color: #455A64;
+    font-size: 14px;
 }
 
 .lista-proyectos ul{
@@ -177,6 +192,9 @@ body.index {
 }
 .lista-proyectos ul li {
     margin-bottom: 1rem;
+}
+.lista-proyectos ul li a {
+    color:#323232;
 }
 .lista-proyectos ul li a:hover {
     color: #FDD835;
@@ -189,7 +207,8 @@ body.index {
 .contenido-principal {
     flex: 1;
     padding: 1rem;
-    overflow: scroll;
+    /* overflow: scroll; */
+    overflow-y: scroll;
 }
 .contenido-principal h1,
 .contenido-principal h2 {
@@ -208,21 +227,25 @@ body.index {
 .agregar-tarea {
     max-width: 800px;
     width: 90%;
-    background-color: #607D8B;
+    background-color: #f1f1f1;
+    box-shadow: 2px 2px 15px 3px #d7d7d7;
+    border-radius: 15px;
     margin: 0 auto;
     padding: 2rem;
-    color: white;
+    color: #323232;
     transition: background-color .5s ease-in-out;
 }
 
 /** Listado Pendientes **/
 .listado-pendientes {
-    background-color: #F2F2F2;
+    background-color: #ffffff;
     max-width: 800px;
     width: 90%;
     margin: 2rem auto 0 auto;
+    box-shadow: 2px 2px 15px 3px #d7d7d7;
+    border-radius: 15px;
     padding: 2rem;
-    border: 1px solid #999;
+    /* border: 1px solid #999; */
 }
 .listado-pendientes ul {
     padding: 0;
@@ -276,7 +299,8 @@ body.index {
 /** Linea de Avance **/
 .barra-avance {
     height: 30px;
-    border: 1px solid #999;
+    border: 1px solid rgb(226, 226, 226);
+    border-radius: 10px;
     max-width: 800px;
     width: 90%;
     margin: 0 auto;
@@ -284,6 +308,7 @@ body.index {
 .porcentaje {
     width: 0%;
     height: 100%;
+    border-radius: 10px;
     background-color: #00B762;
     background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
     background-size: 1rem 1rem;
@@ -293,7 +318,9 @@ body.index {
 form.agregar-proyecto {
     max-width: 800px;
     width: 90%;
-    background-color: #607D8B;
+    background-color: #f1f1f1;
+    box-shadow: 2px 2px 15px 3px #d7d7d7;
+    border-radius: 15px;
     margin: 0 auto;
     padding: 2rem;
     color: white;
@@ -302,6 +329,7 @@ form.agregar-proyecto {
 form.agregar-proyecto label,
 form.agregar-proyecto input {
     display: block;
+    color:#323232;
 }
 form.agregar-proyecto label {
     flex: 0 0 150px;
@@ -346,7 +374,22 @@ form input[type="submit"]{
     text-align: center;
     display: block;
 }
+body > main > div > div.listado-pendientes > ul > li > div > i.fas.fa-trash:hover{
+    color:#323232;
+    transition:color 300ms ease-in-out;
+}
+body > main > div > div.listado-pendientes > ul > li > div > i.fas.fa-trash:hover{
+    color:rgb(212, 97, 97);
+}
 
+body > main > div > div.listado-pendientes > ul > li > div > i.far.fa-check-circle{
+    /* color:#323232; */
+    transition:color 300ms ease-in-out;
+
+}
+body > main > div > div.listado-pendientes > ul > li > div > i.far.fa-check-circle:hover{
+    color:#00B762;
+}
 /*
 
 
