@@ -63,4 +63,8 @@ app.use((req,res,next)=>{
 //routes
 app.use('/',routes());
 
-app.listen(3000);
+const port = process.env.PORT || 8080;
+
+app.listen(port,()=>{
+    console.log('SERVER UP');
+});
